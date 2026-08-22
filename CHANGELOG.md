@@ -1,3 +1,7 @@
+## Unreleased
+
+- Pin `flutter_blue_plus` to 1.36.8, the final BSD-3-Clause 1.x release.
+
 ## 0.1.3
 
 - Fix BLE advertising crash on Android SDK 36 (`addManufacturerSpecificData` removed).

@@ -73,10 +73,7 @@ class BleTransport implements MeshTransport {
   Future<bool> send(MeshMessage message, String peerId) async {
     try {
       final device = BluetoothDevice.fromId(peerId);
-      await device.connect(
-        license: License.free,
-        timeout: const Duration(seconds: 5),
-      );
+      await device.connect(timeout: const Duration(seconds: 5));
 
       final services = await device.discoverServices();
       final meshService = services.firstWhere(

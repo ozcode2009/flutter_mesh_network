@@ -12,7 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_blue_plus: ^2.2.1
+  # 1.36.8 is the final BSD-3-Clause release; 2.x uses a custom license.
+  flutter_blue_plus: 1.36.8
   sqflite: ^2.4.1
   path: ^1.9.1
   uuid: ^4.5.1
