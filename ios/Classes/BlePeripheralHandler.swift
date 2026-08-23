@@ -52,7 +52,18 @@ final class BlePeripheralHandler: NSObject {
     }
 
     func startGattServer() -> Bool {
-        guard let pm = peripheralManager, pm.state == .poweredOn else {
+        print("[MeshBle] startGattServer ENTER")
+        guard let pm = peripheralManager else {
+            print("[MeshBle] peripheralManager is nil")
+            NSLog("[MeshBle] Peripheral manager not ready")
+            return false
+        
+        }
+        
+        print("[MeshBle] peripheral state = \(pm.state.rawValue)")
+        
+        guard pm.state == .poweredOn else {
+            print("[MeshBle] peripheralManager is nil")
             NSLog("[MeshBle] Peripheral manager not ready")
             return false
         }
@@ -77,6 +88,7 @@ final class BlePeripheralHandler: NSObject {
         pm.add(service)
         isGattRunning = true
         NSLog("[MeshBle] GATT Server started")
+        print("[MeshBle] GATT SERVER STARTED")
         return true
     }
 
@@ -199,6 +211,7 @@ extension BlePeripheralHandler: CBPeripheralManagerDelegate {
         }
 
         NSLog("[MeshBle] Peripheral state: %@", stateStr)
+        print("[MeshBle] state changed to \(peripheral.state.rawValue)")
     }
 
     func peripheralManagerDidStartAdvertising(
