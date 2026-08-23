@@ -38,6 +38,9 @@ final class BlePeripheralHandler: NSObject {
     /// Set when startAdvertising is called before the peripheral is powered on.
     private var pendingAdvertise = false
 
+    //Pending gatt start
+    private var pendingGattStart = false
+
     // MARK: - Channel Setup
 
     func setMethodChannel(_ channel: FlutterMethodChannel) {
@@ -56,6 +59,7 @@ final class BlePeripheralHandler: NSObject {
         guard let pm = peripheralManager else {
             print("[MeshBle] peripheralManager is nil")
             NSLog("[MeshBle] Peripheral manager not ready")
+            pendingGattStart = true
             return false
         
         }
@@ -65,8 +69,11 @@ final class BlePeripheralHandler: NSObject {
         guard pm.state == .poweredOn else {
             print("[MeshBle] peripheralManager is nil")
             NSLog("[MeshBle] Peripheral manager not ready")
+            pendingGattStart = true
             return false
         }
+
+        pendingGattStart = false
 
         let txCharacteristic = CBMutableCharacteristic(
             type: txCharUUID,
@@ -195,6 +202,9 @@ extension BlePeripheralHandler: CBPeripheralManagerDelegate {
         switch peripheral.state {
         case .poweredOn:
             stateStr = "poweredOn"
+            if pendingGattStart || !isGattRunning {
+                _ = startGattServer()
+            }
             if pendingAdvertise {
                 pendingAdvertise = false
                 doStartAdvertising()
