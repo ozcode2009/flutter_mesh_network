@@ -28,11 +28,11 @@ import java.nio.charset.StandardCharsets
 class WifiAwareHandler(private val context: Context) {
 
     companion object {
-        private const val TAG = "MshNearby"
+        private const val TAG = "MhNearby"
         private const val MAX_NAN_MESSAGE_SIZE = 255
         private const val CHUNK_HEADER_OVERHEAD = 40
         private const val CHUNK_SEND_DELAY_MS = 50L
-        private const val SERVICE_INFO_PREFIX = "MSH"
+        private const val SERVICE_INFO_PREFIX = "MH"
     }
 
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -94,7 +94,7 @@ class WifiAwareHandler(private val context: Context) {
             "isAvailable" -> result.success(isWifiAwareAvailable())
 
             "publish" -> {
-                val serviceName = call.argument<String>("serviceName") ?: "_mshmesh._tcp"
+                val serviceName = call.argument<String>("serviceName") ?: "_mhmesh._tcp"
                 val userId = call.argument<String>("userId") ?: ""
                 val userName = call.argument<String>("userName") ?: ""
                 val latitude = call.argument<Double>("latitude")
@@ -103,7 +103,7 @@ class WifiAwareHandler(private val context: Context) {
             }
 
             "subscribe" -> {
-                val serviceName = call.argument<String>("serviceName") ?: "_mshmesh._tcp"
+                val serviceName = call.argument<String>("serviceName") ?: "_mhmesh._tcp"
                 startSubscribe(serviceName, result)
             }
 
@@ -346,7 +346,7 @@ class WifiAwareHandler(private val context: Context) {
 
         val serviceInfo = buildServiceInfo(userId, userName, cachedLatitude, cachedLongitude)
         val config = PublishConfig.Builder()
-            .setServiceName(cachedServiceName ?: "_mshmesh._tcp")
+            .setServiceName(cachedServiceName ?: "_mhmesh._tcp")
             .setPublishType(PublishConfig.PUBLISH_TYPE_UNSOLICITED)
             .setServiceSpecificInfo(serviceInfo)
             .setTerminateNotificationEnabled(true)
@@ -441,7 +441,7 @@ class WifiAwareHandler(private val context: Context) {
         val parts = info.split("|")
 
         if (parts.isEmpty() || parts[0] != SERVICE_INFO_PREFIX) {
-            Log.w(TAG, "Ignoring non-MSH peer: $info")
+            Log.w(TAG, "Ignoring non-MH peer: $info")
             return
         }
 
