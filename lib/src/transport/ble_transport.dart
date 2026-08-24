@@ -86,7 +86,7 @@ class BleTransport implements MeshTransport {
       );
 
       final bytes = utf8.encode(message.encode());
-      const chunkSize = 182;
+      const chunkSize = 20;
       for (var i = 0; i < bytes.length; i += chunkSize) {
         final end = (i + chunkSize).clamp(0, bytes.length);
         await txChar.write(bytes.sublist(i, end), withoutResponse: false);
