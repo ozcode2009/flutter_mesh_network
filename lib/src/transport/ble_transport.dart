@@ -188,9 +188,9 @@ class BleTransport implements MeshTransport {
 
   void _handleScanResult(ScanResult result) {
     final name = result.advertisementData.advName;
-    if (!name.startsWith('GEA_') && !name.startsWith('MSH_')) return;
+    if (!name.startsWith('GEA_') && !name.startsWith('MH')) return;
 
-    final prefix = name.startsWith('GEA_') ? 'GEA_' : 'MSH_';
+    final prefix = name.startsWith('GEA_') ? 'GEA_' : 'MH';
     final nodeId = result.device.remoteId.str;
     final nodeName = name.replaceFirst(prefix, '');
 
