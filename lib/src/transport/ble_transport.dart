@@ -102,22 +102,22 @@ class BleTransport implements MeshTransport {
   }
 
   @override
-  Future<int> broadcast(MeshMessage message) async {
-    // If GATT server is running, notify all connected subscribers.
-    if (_isGattRunning) {
-      return _notifySubscribers(message);
-    }
+Future<int> broadcast(MeshMessage message) async {
+  var count = 0;
 
-    // Otherwise, send individually to discovered BLE peers.
-    var count = 0;
-    for (final node in _discoveredNodes.values) {
-      if (node.connectionType == TransportType.ble && node.isOnline()) {
-        final ok = await send(message, node.id);
-        if (ok) count++;
-      }
-    }
-    return count;
+  if (_isGattRunning) {
+    count += await _notifySubscribers(message);
   }
+
+  for (final node in _discoveredNodes.values) {
+    if (node.connectionType == TransportType.ble && node.isOnline()) {
+      final ok = await send(message, node.id);
+      if (ok) count++;
+    }
+  }
+
+  return count;
+}
 
   @override
   Future<void> updateLocation(double latitude, double longitude) async {
