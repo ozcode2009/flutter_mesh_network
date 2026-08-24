@@ -10,7 +10,7 @@ final class MeshConnectivityHandler: NSObject {
 
     // MARK: - Constants
 
-    private static let peerPrefix = "MSH_"
+    private static let peerPrefix = "MH"
     private static let defaultServiceType = "mesh-net" // max 15 chars, lowercase + hyphens
 
     // MARK: - Properties
