@@ -27,7 +27,7 @@ final class BlePeripheralHandler: NSObject {
     // MARK: - Properties
 
     private var peripheralManager: CBPeripheralManager?
-    private weak var methodChannel: FlutterMethodChannel?
+    private var methodChannel: FlutterMethodChannel?
 
     private var rxCharacteristic: CBMutableCharacteristic?
 
