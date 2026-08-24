@@ -24,9 +24,9 @@ final class BlePeripheralHandler: NSObject {
         string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
     )
 
-    // TEMP: changed from MSH_ so we can prove this source is actually
+    // TEMP: changed from MH so we can prove this source is actually
     // making it into the TestFlight build.
-    private static let peerPrefix = "MH_"
+    private static let peerPrefix = "MH"
 
     // MARK: - Properties
 
