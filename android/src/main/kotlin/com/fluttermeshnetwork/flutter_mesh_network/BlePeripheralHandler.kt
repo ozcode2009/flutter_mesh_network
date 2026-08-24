@@ -21,14 +21,14 @@ import java.util.UUID
  *
  * Channel: `flutter_mesh_network/ble`
  *
- * Advertising name prefix: "MSH_"
+ * Advertising name prefix: "MH"
  * Uses the Nordic UART Service (NUS) UUID layout for TX/RX characteristics.
  */
 class BlePeripheralHandler(private val context: Context) {
 
     companion object {
-        private const val TAG = "MshBle"
-        private const val NAME_PREFIX = "MSH_"
+        private const val TAG = "MhBle"
+        private const val NAME_PREFIX = "MH"
 
         // Nordic UART Service UUIDs
         val SERVICE_UUID: UUID  = UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e")
